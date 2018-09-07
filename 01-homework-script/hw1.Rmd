@@ -1,0 +1,60 @@
+---
+title: "hw1"
+author: "Jamie Bedics"
+date: "9/6/2018"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Markdown
+
+## R Markdown
+
+### R Markdown
+
+_Hypothesis 1_: **This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.**
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+
+```{r libraries}
+library(ggplot2)
+library(dplyr)
+```
+
+```{r cars}
+summary(cars)
+
+```
+
+
+Hypothesis 2
+```{r trucks}
+
+```
+
+```{r planes}
+
+```
+
+```{r buses}
+
+```
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
