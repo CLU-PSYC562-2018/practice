@@ -1,8 +1,11 @@
 ---
 title: "R4DS Chapter 1 Textbook Code"
 author: "Jamie Bedics"
-date: "9/13/2018"
-output: html_document
+date: "9/11/2018"
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -11,22 +14,27 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ## Prerequisites
-```{r}
-library(tidyverse) # this assumes I installed the `tidyverse` in the console
+
+*****
+
+```{r tidyvers library, warning=FALSE, message=FALSE}
+library(tidyverse)
 ```
 
 Tidyverse is a collection of packages that are grouped together.  They include, for example, `ggplot2` which is a library we frequently use for data visualization.  If you have trouble loading the `tidyverse`
 
 If this doesn't work, you could load the packages individually like below:
-```{r}
+```{r ggplot2 library}
 library(ggplot2)
 ```
 
-## First Steps
+*****
 
-### The MPG Dataframe
+## First Steps (pg 4)
 
-```{r}
+### The MPG Tibble (dataframe) (pg. 4)
+
+```{r mpg tibble}
 mpg
 ```
 
@@ -39,23 +47,23 @@ mpg
 
 Since the data is in a package then there will be a help page associated with it.
 
-```{r}
-?mpg
+```{r mpg help}
+#?mpg
 ```
 1. Describe the dataset.
 2. What is `disp` anyway?  
 
 
-### Creating a ggplot
+### Creating a ggplot (pg. 5)
 
 1. Book example pg. 5
-```{r}
+```{r first plot}
 ggplot(data=mpg) +
   geom_point(mapping = aes(x=displ, y=hwy))
 ```
 
 A different version with x and y in first command. More typical
-```{r}
+```{r second plot}
 ggplot(mpg, aes(displ, hwy)) +
   geom_point()
 ```
@@ -63,7 +71,8 @@ ggplot(mpg, aes(displ, hwy)) +
 The first line defines the data and your x and y-axes.  The second line, "geom_point", adds a layer of points.  We can change and add layers. Inside each layer, we learn commands that allow us to adjust the quality of each layer or function.
 
 
-### Exercises pg. 6
+### Exercises (pg. 6)
+
 1. 
 2.
 3.

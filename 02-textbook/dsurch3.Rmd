@@ -1,13 +1,62 @@
 ---
-title: "dsurch3"
+title: "DSUR Chapter 3 Textbook Code"
 author: "Jamie Bedics"
-date: "9/11/2018"
-output: html_document
+date: "9/13/2018"
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+
+## Creating Variables (3.5.1)
+
+Here we use the concatenate function to create an object.  Here we create a dataframe that consists of the names of members of Metallica's band and their age.
+
+```{r metallica df}
+metallicaNames <- c("Lars", "James", "Kirk", "Rob")
+metallicaAges <- c(47, 47, 48, 46)
+```
+
+
+### Creating a Dataframe (3.5.2)
+```{r}
+metallica.df <- data.frame(name = metallicaNames, age = metallicaAges)
+metallica.df # .df was added so you know what is a `dataframe`
+```
+
+Here we add new information to the _existing_ dataframe. 
+ 
+```{r children}
+metallica.df$childAge <- c(12, 12, 4, 6)
+```
+
+You will most likely **never** create a dataframe in R unless you're doing a simulation or simply playing with R.
+
+
+### Calculating a new variable from exisiting (3.5.3)
+
+Create the age of the band member when they had their children within the existing dataframe
+```{r}
+metallica.df$fatherhoodAge <- metallica.df$age - metallica.df$childAge
+```
+
+Working with Dates 
+```{r}
+metallica.df$anniversary <- as.Date(c("1990-06-01", "2000-12-12", "1994-06-01", "2005-10-12"))
+```
+
+Examine the structure of the data
+```{r}
+str(metallica.df)
+```
+
+
+
+
+
+
 

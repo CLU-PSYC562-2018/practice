@@ -1,0 +1,146 @@
+---
+title: "R Markdown Tips"
+author: "Jamie Bedics"
+date: "9/13/2018"
+output:
+  html_document:
+    toc: true
+  pdf_document: default
+  word_document: default
+---
+
+
+# Setup
+
+This chunk pops up for _every_ `.Rmd` you open.  It will controls the options that appear in from **every** chunk in your document.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+In this particular setup chunk, it's call the `opts_chunk$set` function from the `knitr` library. I'll never see warnings or messages but I _will_ see code because `echo = True` and the results.  Notice `include=FALSE` will including _nothing_ from the chunk in the output.
+
+
+## Hide code using `echo=FALSE`
+
+Here you see code when you render:
+```{r code}
+library(tidyverse)
+```
+
+Here you don't:
+```{r no code, echo=FALSE}
+library(tidyverse)
+```
+Sneaky, sneaky.
+
+
+
+## Hide Results
+
+The only thing we haven't covered is how to hide the results which you can with `results='hide'`
+
+Results appear:
+```{r}
+a <- 1+1
+a
+```
+
+Results do not appear:
+```{r, results='hide'}
+a <- 1+1
+a
+```
+
+Further chunk options can be found at the following **[site](https://yihui.name/knitr/options)**.
+
+\break
+
+# Break line
+
+You can add a break line and create a separate page on pdf if you add the `\break` command.  This does not work for .html or for .docx.
+
+If you want to do so for .docx the instructions are pretty straightforward and can be found at this website:
+[https://datascienceplus.com/r-markdown-how-to-insert-page-breaks-in-a-ms-word-document/](https://datascienceplus.com/r-markdown-how-to-insert-page-breaks-in-a-ms-word-document/)
+
+The steps can be broken down as follows:
+
+1. Render a word doc and save is as something like "rmarkdown_template.docx" and save in the **same** folder as your code.
+
+2. Open the new word file and change the style template as noted on the website.  There are several steps.
+
+3. Save the template.
+
+4. In the YAML  (the code at the very top with you name), remove the `default` and add the following under word_document: 
+  reference_docx: rmarkdown_template.docx
+
+Notice the number formmating comes out nicely above but we can use bullets too:
+
+- Render a word doc and save is as something like "rmarkdown_template.docx" and save in the **same** folder as your code.
+
+- Open the new word file and change the style template as noted on the website.  There are several steps.
+
+- Save the template.
+
+- In the YAML  (the code at the very top with you name), remove the `default` and add the following under     
+    - word_document: 
+        
+        reference_docx: rmarkdown_template.docx
+
+\break
+
+# Equations
+
+You can get fancy with equations:
+
+$$\begin{array}{ccc}
+x_{11} & x_{12} & x_{13} \\
+x_{21} & x_{22} & x_{23}
+\end{array}$$
+
+\break
+
+# Quotations
+
+Sometimes in describing your results you might want to quote a famous person for inspiration:
+
+> "Today is only one day in all the days that will ever be. But what will happen in all the other days that ever come can depend on what you do today."
+>
+> --- Ernest Hemingway, _From Whom the Bell Tolls_
+
+\break
+
+# Table of Contents
+
+Notice in the YAML, that under `.html` there is a `toc=true` and there is no `default` statement like there is for word and pdf.  Knit html and .doc and compare.
+
+What's the difference?
+
+Change to the `toc=` to `toc_float = true` under html. What happens?  This only works for `html`.
+
+Additional tips on `html` can be found **[here](https://rmarkdown.rstudio.com/html_document_format)** at R Studio.
+
+#####
+
+# Practice Exercises
+
+1. Create an identical chunk to the one below but hide the code.
+```{r practice1}
+plot(cars)
+```
+
+Hide the code:
+
+
+2. Make a quote
+
+3. Add a break line so the `Practice Exercises` are on a seperate page if you can render to .pdf. You can do this even if you can't render to .pdf.
+
+4. Add a TOC to the the word document format.
+
+5. Make all the headers one size smaller except for the 5 level header right before `Practical Exercises`
+
+
+
+
+
