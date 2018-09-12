@@ -49,7 +49,7 @@ Working with Dates
 metallica.df$anniversary <- as.Date(c("1990-06-01", "2000-12-12", "1994-06-01", "2005-10-12"))
 ```
 
-Examine the structure of the data
+Examine the structure of the data.
 ```{r}
 str(metallica.df)
 ```
