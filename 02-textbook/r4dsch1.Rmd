@@ -70,6 +70,7 @@ ggplot(mpg, aes(displ, hwy)) +
 
 The first line defines the data and your x and y-axes.  The second line, "geom_point", adds a layer of points.  We can change and add layers. Inside each layer, we learn commands that allow us to adjust the quality of each layer or function.
 
+*****
 
 ### Exercises (pg. 6)
 
