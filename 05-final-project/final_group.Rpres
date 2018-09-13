@@ -1,0 +1,166 @@
+Final Group Presentation Template
+========================================================
+author: Student Name1, Student Name2
+date: "`r Sys.Date()`"
+autosize: true
+<br>
+![readr](images/tidy.png)
+
+The Problem
+========================================================
+autosize: true
+We are interested in public safety. Specifically, we focused on traffic flow.
+
+- Speed of Car
+- Distance to Stop
+
+How the data was imported? 
+========================================================
+autosize: true
+![readr](images/readr.png)
+
+
+Data is located in `datasets`.  No need to import.
+========================================================
+autosize: true
+
+- The data has two vectors with 50 rows. 
+- The two vectors are speed (mph) and dist (feet) which are both numeric.
+
+```{r}
+str(cars)
+```
+
+Data Wrangling and Transformations
+========================================================
+autosize: true
+
+![readr](images/forcats.png)
+![readr](images/tidry.png)
+
+Convert from MPH and Feet to KMH and Meters
+========================================================
+autosize: true
+- Converted miles per hour to kilometers per hour (1 to 1.6)
+- Converted feet to meters (1 to .3)
+```{r}
+library(tidyverse)
+cars2 <- cars %>% 
+  dplyr::mutate(kmh = speed*1.6, meters = dist*.3 )
+```
+
+Data Wrangling and Transformations: Results
+========================================================
+autosize: true
+- No wrangling; just transformation.
+```{r}
+head(cars2, n=5)
+```
+
+Numeric Summary of the data using `summarize`
+========================================================
+autosize: true
+```{r}
+summarize(cars2, mean(dist), mean(speed))
+```
+
+```{r}
+summarize(cars2, mean(kmh), mean(meters))
+```
+
+
+Visualize Data with GGPLOT
+========================================================
+autosize: true
+![readr](images/ggplot.png)
+
+Visualization of the Data by Metric
+========================================================
+autosize: true
+
+```{r, echo=FALSE}
+plot(cars2$speed, cars2$dist, main = "MPH and Feet", xlab = "Speed (MPH)", ylab = "Distance (feet)")
+```
+***
+```{r, echo=FALSE}
+plot(cars2$kmh, cars2$meters, main = "KMH and Meters", xlab = "Speed (KMH)", ylab = "Distance (meters)")
+```
+
+How the data was modeled: Include equations
+========================================================
+autosize: true
+<br>
+- We used a linear regression
+<br>
+<br>
+$$Y_i=\alpha+X_i\beta$$
+
+
+Linear Regression: R Code
+========================================================
+autosize: true
+
+```{r, warning=FALSE, message=FALSE}
+model1.lm <- lm(dist ~ speed, data = cars2)
+```
+
+```{r, warning=FALSE, message=FALSE}
+model2.lm <- lm(meters ~ kmh, data = cars2)
+```
+
+Results: MPH and Feet
+========================================================
+autosize: true
+```{r}
+library(arm)
+display(model1.lm)
+```
+
+Results: KPH and Meters
+========================================================
+autosize: true
+```{r}
+library(arm)
+display(model2.lm)
+```
+
+Standardize the Coefficients with `lm.beta`
+========================================================
+autosize: true
+```{r, eval=FALSE}
+library(lm.beta)
+lm.beta(model.lm)
+```
+
+Results: They're the same!
+========================================================
+autosize: true
+<br>
+```{r, echo=FALSE}
+library(lm.beta)
+lm.beta(model1.lm)
+```
+***
+<br>
+```{r, echo=FALSE}
+lm.beta(model2.lm)
+```
+
+Summary:
+========================================================
+autosize: true
+- For every mph increase in speed, the feet to stop increases by 3.93!
+- Association is positive and strong.
+- In the future, explore association with accidents!
+
+Conclusions:
+========================================================
+autosize: true
+- Follow the speed limit!
+
+```{r fig.width=50, fig.height=20,echo=FALSE}
+library(png)
+library(grid)
+img <- readPNG("images/birds.png")
+ grid.raster(img)
+```
