@@ -1,7 +1,7 @@
 ---
 title: "R Markdown Tips"
 author: "Jamie Bedics"
-date: "9/13/2018"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
     toc: true
@@ -121,6 +121,8 @@ Change to the `toc=` to `toc_float = true` under html. What happens?  This only 
 Additional tips on `html` can be found **[here](https://rmarkdown.rstudio.com/html_document_format)** at R Studio.
 
 #####
+
+\break
 
 # Practice Exercises
 
