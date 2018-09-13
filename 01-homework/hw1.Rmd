@@ -1,6 +1,5 @@
 ---
 author: "Jamie Bedics"
-date: "9/6/2018"
 output:
   pdf_document: default
   html_document: default
@@ -10,5 +9,5 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Homework 1 Due (9/26/18)
+
 

@@ -10,7 +10,7 @@ output:
 ---
 
 
-# Setup
+## Setup
 
 This chunk pops up for _every_ `.Rmd` you open.  It will controls the options that appear in from **every** chunk in your document.
 
@@ -21,44 +21,49 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 In this particular setup chunk, it's call the `opts_chunk$set` function from the `knitr` library. I'll never see warnings or messages but I _will_ see code because `echo = True` and the results.  Notice `include=FALSE` will including _nothing_ from the chunk in the output.
 
 
-## Hide code using `echo=FALSE`
+### 1. Hide code using `echo=FALSE`
 
-Here you see code when you render:
+a. Here you see code when you render:
 ```{r code}
-library(tidyverse)
+a <- 1+1
+a
 ```
+Some people might want to see your code and others might not care.
 
-Here you don't:
+
+b. If you want to hide your code from the audience then change `echo=` to `FALSE`: 
 ```{r no code, echo=FALSE}
-library(tidyverse)
-```
-Sneaky, sneaky.
-
-
-
-## Hide Results
-
-The only thing we haven't covered is how to hide the results which you can with `results='hide'`
-
-Results appear:
-```{r}
 a <- 1+1
 a
 ```
+It's much cleaner this way especially if you have a lot of preliminary work.  
 
-Results do not appear:
-```{r, results='hide'}
-a <- 1+1
-a
-```
+### 2. Common used chunk options
+
+The additional options which are always worth using include:
+
+- warning = FALSE
+- messages = FALSE
+
+
+It will clea up a lot of mess in your nicely rendered documents. 
+
 
 Further chunk options can be found at the following **[site](https://yihui.name/knitr/options)**.
 
 \break
 
-# Break line
+## Page Break
 
-You can add a break line and create a separate page on pdf if you add the `\break` command.  This does not work for .html or for .docx.
+The following are instructions for adding page breaks in your documents.  It's VERY easy for PDF but not so easy with DOC output.
+
+### 1. Add Page Breaks to a rendered .PDF document. 
+
+You can add a page break and create a separate page on pdf if you add the `\break` command.  This does not work for .html or for .docx.
+
+Do not inlcude the `\break' in a chunck and do not include ticks that surround slash and word
+
+### 2. Add Pagre Breaks to a rendered .DOCX document.
 
 If you want to do so for .docx the instructions are pretty straightforward and can be found at this website:
 [https://datascienceplus.com/r-markdown-how-to-insert-page-breaks-in-a-ms-word-document/](https://datascienceplus.com/r-markdown-how-to-insert-page-breaks-in-a-ms-word-document/)
@@ -74,7 +79,9 @@ The steps can be broken down as follows:
 4. In the YAML  (the code at the very top with you name), remove the `default` and add the following under word_document: 
   reference_docx: rmarkdown_template.docx
 
-Notice the number formmating comes out nicely above but we can use bullets too:
+5. Once you complete these steps, you just have to add a five number signs `#####` to indicate a page break.
+
+As an aside, notice the number formmating comes out nicely above but we can use bullets too:
 
 - Render a word doc and save is as something like "rmarkdown_template.docx" and save in the **same** folder as your code.
 
@@ -87,9 +94,11 @@ Notice the number formmating comes out nicely above but we can use bullets too:
         
         reference_docx: rmarkdown_template.docx
 
+- Once you complete these steps, you just have to add a five number signs `#####` to indicate a page break.
+
 \break
 
-# Equations
+## Equations
 
 You can get fancy with equations:
 
@@ -100,7 +109,7 @@ x_{21} & x_{22} & x_{23}
 
 \break
 
-# Quotations
+## Quotations
 
 Sometimes in describing your results you might want to quote a famous person for inspiration:
 
@@ -110,13 +119,11 @@ Sometimes in describing your results you might want to quote a famous person for
 
 \break
 
-# Table of Contents
+## Table of Contents
 
-Notice in the YAML, that under `.html` there is a `toc=true` and there is no `default` statement like there is for word and pdf.  Knit html and .doc and compare.
+Notice in the YAML (top of the page), that under `.html` there is a `toc=true` and there is no `default` statement like there is for word and pdf.  Now, Knit html and .doc and compare. What's the difference?
 
-What's the difference?
-
-Change to the `toc=` to `toc_float = true` under html. What happens?  This only works for `html`.
+Add `toc_float = true` under `toc=true` and knit to html.  What happens?  
 
 Additional tips on `html` can be found **[here](https://rmarkdown.rstudio.com/html_document_format)** at R Studio.
 
@@ -124,7 +131,7 @@ Additional tips on `html` can be found **[here](https://rmarkdown.rstudio.com/ht
 
 \break
 
-# Practice Exercises
+## Practice Exercises
 
 1. Create an identical chunk to the one below but hide the code.
 ```{r practice1}
@@ -143,6 +150,8 @@ Hide the code:
 5. Make all the headers one size smaller except for the 5 level header right before `Practical Exercises`
 
 
+
+*****
 
 
 
