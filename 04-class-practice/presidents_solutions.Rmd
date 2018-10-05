@@ -1,0 +1,200 @@
+---
+title: "Wrangling Practice with US President Data"
+author: "NAME"
+date: "`r format(Sys.Date())`"
+output: pdf_document
+---
+
+
+In this assignment, you'll work with the dataset called `presidential` in the `ggplot2` packages.  I'll also introduce you to the `lubridate` packages that is mentioned in your book but will not be covered in class. 
+
+
+# Setup and Preliminaries
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r load tidyverse}
+library(tidyverse)
+```
+
+
+1. What variables are in the data `presidential`? 
+```{r names}
+names(presidential)
+```
+
+2. How many rows and columns?
+```{r dimensions}
+dim(presidential)
+```
+
+*****
+\break
+
+# Practice your Wrangle Skills
+
+3. Use `select` to retrieve only the names and party affiliations for the presidents listed. Try and use the `%>%` operator in all your code as much as you can.  Do not save it as a new object.  Just display.
+```{r select name and party}
+presidential %>% select(name, party)
+```
+
+4. Use `filter` to retrieve the Republican presidents only from the `presidential` database.  Do not save it as a new object.  Just display.
+```{r filter party}
+presidential %>% filter(party=="Republican")
+```
+
+5. What Democratic presidents served since 1973? Only show the names of the presidents.  Use `filter` and `select` with a `%>%`.
+```{r filter and select1}
+filter(presidential, start > 1973 & party=="Democratic") %>% 
+  select(name)
+```
+
+5a. Single line for same code with nesting.
+```{r filter and select2}
+select(filter(presidential, start > 1973 & party == "Democratic"), name)
+```
+
+*****
+\break
+
+# Working with Dates using `lubridate`
+
+Lubridate works well with our data to manipulate and work with dates. Here you'll use your first `lubridate` functions called `interval` and `dyears`. Here's a <a  href="https://cran.r-project.org/web/packages/lubridate/lubridate.pdf">link</a> to help pages for the library.  
+
+
+```{r load lubridate}
+library(lubridate) #included in tidyverse but not loaded
+```
+
+## Using `interval` and `dyears`
+
+6. How long was the president's term? Save it to a new object called `mypresidents`.
+```{r term length}
+mypresidents <- presidential %>%
+  mutate(term.length = interval(start, end) / dyears(1))
+mypresidents
+```
+
+7. Checkout `?interval` to see what interval does. You can do the same with `?dyears`.
+What do they do?
+interval:
+dyears:
+
+*****
+\break
+
+## `mutate` for years elected and retired
+
+8. Practice `rename` to make the existing variable names appear as you want them to appear. In this case, remove the period between the variable we just created called `term.length`.  Rename it to `term_length` and resave it as `mypresidents`.
+```{r}
+mypresidents <- mypresidents %>% rename(term_length = term.length)
+mypresidents
+```
+
+9. Create a variable that shows the year the president was elected.  Here we use `year` from `lubridate` within `mutate`.  Just uncomment the commands and run it.
+```{r}
+mypresidents <- mutate(mypresidents, elected = year(start)-1)
+mypresidents
+```
+What did it do?
+Answer:
+
+10. Repeat the above code but create a new variable called `retired` that notes one year after their term ended.
+```{r}
+mypresidents <- mutate(mypresidents, retired = year(end)+1)
+mypresidents
+```
+What did it do?
+Answer:
+
+*****
+\break
+
+## Revising unique cells
+
+11. Lyndon Johnson and Gerald Ford were not elected.  We need to sift through the data and put in a `NA` for their elected year.  You can do this using the `ifelse` function and the `%in%` operator. Explain what this doing.
+```{r}
+mypresidents <- mypresidents %>% 
+  mutate(elected = ifelse((name %in% c("Johnson","Ford")), NA, elected))
+mypresidents
+```
+
+Answer:
+
+12. Sort the data frame by `term_length` using `arrange`. Don't save it just run with with a pipe. Who had the shortest term length?
+```{r}
+mypresidents %>% arrange(desc(term_length))
+```
+Answer: 
+
+
+13. Use `arrange` to sort the further by `party` (still use `term_length`!). Use `arrange`, the pipe, and `select` to show only `name`, `term_length` and `party`.  What democrat had the shortest term?
+```{r}
+mypresidents %>% 
+  arrange(desc(term_length), party) %>% 
+  select(name, term_length, party)
+```
+
+Answer: 
+
+
+*****
+\break
+
+# Revisiting `summarize` using the presidential data
+
+14. `Summarize` will provide a single row of information that can summarize your data in a number of ways.  In one command using `summarize`, see if you can create the following variables:
+
+* `n()` counts up the number of people
+* `first_year` using min(year(start)) to tell us first year.
+* `last_year` using max(year(end)) to tell us the last year.
+* `avg_term_length` using mean by term_length
+* `num_dems` using sum by party=="Democratic" (it adds them up)
+
+
+## Create a summary of the data
+```{r}
+mypresidents %>%
+  summarize(
+    N = n(), 
+    first_year = min(year(start)), 
+    last_year = max(year(end)),
+    avg_term_length = round(mean(term_length), digits=2),
+    num_dems = sum(party=="Democratic"), 
+    years = round(sum(term_length), digits=2)) 
+```
+What was the average term length?
+
+*****
+\break
+
+## Add `party` as a grouping variable to the above code.
+
+15. `Summarize` the code from above by group it by `party` using `group_by`
+```{r}
+mypresidents %>%
+  group_by(party) %>%
+  summarize(
+    N = n(), 
+    first_year = min(year(start)), 
+    last_year = max(year(end)),
+    avg_term_length = round(mean(term_length), digits=2),
+    num_dems = sum(party=="Democratic"), 
+    years = round(sum(term_length), digits=2)) 
+```
+What was the average term length for Republicans? Democrats?
+
+
+
+
+
+
+
+
+
+
+
+
+
