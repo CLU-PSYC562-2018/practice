@@ -46,7 +46,7 @@ The additional options which are always worth using include:
 - messages = FALSE
 
 
-It will clea up a lot of mess in your nicely rendered documents. 
+It will clean up a lot of mess in your nicely rendered documents. 
 
 
 Further chunk options can be found at the following **[site](https://yihui.name/knitr/options)**.
