@@ -3,16 +3,18 @@ title: "R Markdown Tips"
 author: "Jamie Bedics"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  html_document:
+  word_document:
     toc: true
   pdf_document: default
-  word_document: default
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 
 ## Setup
 
-This chunk pops up for _every_ `.Rmd` you open.  It will controls the options that appear in from **every** chunk in your document.
+This chunk pops up for _every_ `.Rmd` you open.  It will controls the options that appear in **every** chunk in your document.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
@@ -32,21 +34,22 @@ Some people might want to see your code and others might not care.
 
 
 b. If you want to hide your code from the audience then change `echo=` to `FALSE`: 
-```{r no code, echo=FALSE}
+```{r no code, echo = FALSE}
 a <- 1+1
 a
 ```
 It's much cleaner this way especially if you have a lot of preliminary work.  
 
+
 ### 2. Common used chunk options
 
-The additional options which are always worth using include:
+The additional options which are always worth using:
 
 - warning = FALSE
 - messages = FALSE
 
 
-It will clea up a lot of mess in your nicely rendered documents. 
+It will clean up a lot of mess in your nicely rendered documents. 
 
 
 Further chunk options can be found at the following **[site](https://yihui.name/knitr/options)**.
