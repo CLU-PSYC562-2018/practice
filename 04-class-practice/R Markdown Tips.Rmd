@@ -18,6 +18,7 @@ This chunk pops up for _every_ `.Rmd` you open.  It will controls the options th
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+#knitr::opts_knit$set(root.dir=normalizePath('../'))
 ```
 
 In this particular setup chunk, it's call the `opts_chunk$set` function from the `knitr` library. I'll never see warnings or messages but I _will_ see code because `echo = True` and the results.  Notice `include=FALSE` will including _nothing_ from the chunk in the output.
